@@ -21,7 +21,6 @@ export const Navigation = (props) => {
             InVoyc
           </a>{" "}
         </div>
-
         <div
           className="collapse navbar-collapse"
           id="bs-example-navbar-collapse-1"
@@ -48,13 +47,13 @@ export const Navigation = (props) => {
               </a>
             </li>
             <li>
-              <a href="#testimonials" className="page-scroll">
-                Testimonials
+              <a href="#team" className="page-scroll">
+                Team
               </a>
             </li>
             <li>
-              <a href="#team" className="page-scroll">
-                Team
+              <a href="/login" className="page-scroll">
+                Login
               </a>
             </li>
             <li>
