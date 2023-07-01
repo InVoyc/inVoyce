@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "./components/navigation";
 import { Header } from "./components/header";
 import { Features } from "./components/features";
@@ -8,9 +8,11 @@ import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
 import { Team } from "./components/Team";
 import { Contact } from "./components/contact";
+import { Subscription } from "./components/Subscription/Subscription";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import "./App.css";
+import styled from "styled-components";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -19,13 +21,20 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
+  const [modal, setModal] = useState(false);
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
-
+  const handleOpenModal = () => {
+    setModal(true);
+  };
+  const handleCloseModal = () => {
+    setModal(false);
+  };
   return (
-    <div>
-      <Navigation />
+    <AppWrapper>
+      <Navigation handleOpenModal={handleOpenModal} />
+      {modal && <Subscription handleCloseModal={handleCloseModal} />}
       <Header data={landingPageData.Header} />
       <Features data={landingPageData.Features} />
       <About data={landingPageData.About} />
@@ -34,8 +43,14 @@ const App = () => {
       <Testimonials data={landingPageData.Testimonials} />
       <Team data={landingPageData.Team} />
       <Contact data={landingPageData.Contact} />
-    </div>
+    </AppWrapper>
   );
 };
 
 export default App;
+
+const AppWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+`;
