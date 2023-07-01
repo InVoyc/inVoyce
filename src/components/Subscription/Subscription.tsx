@@ -8,7 +8,11 @@ import InputField from "../InputField";
 import { monthlyPlanDetails, yearlyPlanDetails } from "./SidebarData";
 import SubscriptionCards from "./SubscriptionCards";
 
-export const Subscription = ({ handleCloseModal }: any) => {
+interface ModalProp {
+  handleCloseModal: () => void;
+}
+
+export const Subscription = ({ handleCloseModal }: ModalProp) => {
   const [selectedOption, setSelectedOption] = useState("Monthly");
   const [plans, setPlans] = useState(monthlyPlanDetails);
   const [selectedPlan, setSelectedPlan] = useState<any>(plans[2]);

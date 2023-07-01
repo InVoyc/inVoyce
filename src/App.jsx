@@ -1,56 +1,28 @@
-import { useState, useEffect } from "react";
-import { Navigation } from "./components/navigation";
-import { Header } from "./components/header";
-import { Features } from "./components/features";
-import { About } from "./components/about";
-import { Services } from "./components/services";
-import { Gallery } from "./components/gallery";
-import { Testimonials } from "./components/testimonials";
-import { Team } from "./components/Team";
-import { Contact } from "./components/contact";
-import { Subscription } from "./components/Subscription/Subscription";
-import JsonData from "./data/data.json";
-import SmoothScroll from "smooth-scroll";
+import React from "react";
 import "./App.css";
-import styled from "styled-components";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import LandingPage from "./components/LandingPage";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-export const scroll = new SmoothScroll('a[href*="#"]', {
-  speed: 1000,
-  speedAsDuration: true,
-});
 
 const App = () => {
-  const [landingPageData, setLandingPageData] = useState({});
-  const [modal, setModal] = useState(false);
-  useEffect(() => {
-    setLandingPageData(JsonData);
-  }, []);
-  const handleOpenModal = () => {
-    setModal(true);
-  };
-  const handleCloseModal = () => {
-    setModal(false);
-  };
   return (
-    <AppWrapper>
-      <Navigation handleOpenModal={handleOpenModal} />
-      {modal && <Subscription handleCloseModal={handleCloseModal} />}
-      <Header data={landingPageData.Header} />
-      <Features data={landingPageData.Features} />
-      <About data={landingPageData.About} />
-      <Services data={landingPageData.Services} />
-      <Gallery data={landingPageData.Gallery} />
-      <Testimonials data={landingPageData.Testimonials} />
-      <Team data={landingPageData.Team} />
-      <Contact data={landingPageData.Contact} />
-    </AppWrapper>
+    <div>
+      <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element = {<LandingPage />} />
+          <Route path="login" element= {<Login />} />
+          <Route path="/register" element= {<Register />} />
+        </Routes>
+      </BrowserRouter>
+     
+    </div>
   );
 };
 
 export default App;
 
-const AppWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  overflow: auto;
-`;
